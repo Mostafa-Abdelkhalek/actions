@@ -1,24 +1,29 @@
-name: build and push docker image
+name: Build and Push Docker Image
 
 on:
-  workflow_dispatch: 
-jobs: 
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
   build-and-push:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
+
     steps:
-      - name: checkout code
-        uses: actions/checkout@v4
-        with:
-          path: main
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+
+      - name: Build and push Docker image
         env:
-          Repository: nginx
-          image_tag: latest 
-        run: | 
-            docker build -t ${{ secrets.DOCKERHUB_USERNAME}}/$Repository:$image_tag .
-            docker push ${{ secrets.DOCKERHUB_USERNAME}}/$Repository:$image_tag
+          REPOSITORY: nginx
+          IMAGE_TAG: latest
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/$REPOSITORY:$IMAGE_TAG .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/$REPOSITORY:$IMAGE_TAG
