@@ -22,5 +22,5 @@ jobs:
           Repository: nginx
           IMAGE_TAG: latest 
         run: |
-          docker build -t ${{DOCKERHUB_USERNAME}}/$Repository:$IMAGE_TAG .
-          docker push ${{DOCKERHUB_USERNAME}}/$Repository:$IMAGE_TAG
+          docker build -t ${{DOCKERHUB_USERNAME}}/$REPOSITORY:$IMAGE_TAG .
+          docker push ${{DOCKERHUB_USERNAME}}/$REPOSITORY:$IMAGE_TAG
