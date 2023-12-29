@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         env:
-          Repository: 
+          Repository: nginx
           image_tag: latest 
         run: | 
             docker build -t ${{ secrets.DOCKERHUB_USERNAME}}/$Repository:$image_tag .
