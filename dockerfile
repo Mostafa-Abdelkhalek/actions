@@ -1,3 +1,5 @@
-FROM nginx:alpine
+FROM nginx:latest
+
 RUN apt update -y 
+
 EXPOSE 8030
